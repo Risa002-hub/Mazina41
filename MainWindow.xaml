@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Mazina41"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontFamily="Comic Sans MS" Icon="/IMAGES/icon.ico">
+        Title="Mazina41" Height="450" Width="1200" FontFamily="Comic Sans MS" Icon="/IMAGES/icon.ico">
 
     <Grid>
         <Grid.RowDefinitions>

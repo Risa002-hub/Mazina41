@@ -23,6 +23,9 @@ namespace Mazina41
         public ProductPage()
         {
             InitializeComponent();
+
+            var currentShop = Mazina41Entities.GetContext().Product.ToList();
+            ShopListView.ItemsSource = currentShop;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
