@@ -56,7 +56,7 @@
                         </Grid.RowDefinitions>
                         <Image Grid.RowSpan="4" HorizontalAlignment="Left">
                             <Image.Source>
-                                <Binding Path="ImagePath">
+                                <Binding Path="ProductPhotoPath">
                                     <Binding.TargetNullValue>
                                         <ImageSource>
                                             IMAGES/picture.png

@@ -27,9 +27,12 @@ namespace Mazina41
             var currentShop = Mazina41Entities.GetContext().Product.ToList();
             ShopListView.ItemsSource = currentShop;
             ComboType.SelectedIndex = 0;
+            ComboType.ItemsSource = discount_filters;
             UpdateService();
 
+
         }
+        List<string> discount_filters = new List<string> { "все", "0-9%", "10-14%", "15-100%" };
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -45,37 +48,33 @@ namespace Mazina41
             if (TBoxSearch.Text.Length > 0)
                 currentShop = currentShop.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
 
-            if (ComboType.SelectedIndex == 0)
-            {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
-            }
+
             if (ComboType.SelectedIndex == 1)
             {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 9.99)).ToList();
+                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 9)).ToList();
             }
             if (ComboType.SelectedIndex == 2)
             {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 9.99 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 14.99)).ToList();
+                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 10 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 14)).ToList();
             }
             if (ComboType.SelectedIndex == 3)
             {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 14.99 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
+                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 15 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
             }
 
             currentShop = currentShop.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
             SearchResultTB.Text = "кол-во " + Convert.ToString(currentShop.Count) + " из " + Convert.ToString(raw_products_count);
-          
-            ShopListView.ItemsSource = currentShop;
-            ShopListView.ItemsSource = currentShop.ToList();
 
             if (RButtonDown.IsChecked.Value)
             {
-                ShopListView.ItemsSource = currentShop.OrderByDescending(p => p.ProductCost).ToList();
+                currentShop = currentShop.OrderByDescending(p => p.ProductCost).ToList();
             }
             if (RButtonUp.IsChecked.Value)
             {
-                ShopListView.ItemsSource = currentShop.OrderBy(p => p.ProductCost).ToList();
+                currentShop = currentShop.OrderBy(p => p.ProductCost).ToList();
             }
+
+            ShopListView.ItemsSource = currentShop;
 
         }
 
@@ -91,12 +90,12 @@ namespace Mazina41
 
         private void RButtonDown_Checked(object sender, RoutedEventArgs e)
         {
-
+            UpdateService();
         }
 
         private void RButtonUp_Checked(object sender, RoutedEventArgs e)
         {
-
+            UpdateService();
         }
     }
 }
