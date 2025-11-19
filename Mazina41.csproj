@@ -169,7 +169,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="IMAGES\logo.png" />
+    <Resource Include="res\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMAGES\icon.ico" />
@@ -178,6 +178,18 @@
     <Resource Include="IMAGES\picture.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="IMAGES\logo - Копировать.png" />
+    <Resource Include="IMAGES\logo.png" />
+    <Resource Include="IMAGES\B320R5.jpg" />
+    <Resource Include="IMAGES\D329H3.jpg" />
+    <Resource Include="IMAGES\D572U8.jpg" />
+    <Resource Include="IMAGES\F572H7.jpg" />
+    <Resource Include="IMAGES\F635R4.jpg" />
+    <Resource Include="IMAGES\G432E4.jpg" />
+    <Resource Include="IMAGES\G783F5.jpg" />
+    <Resource Include="IMAGES\H782T5.jpg" />
+    <Resource Include="IMAGES\J384T6.jpg" />
+    <Resource Include="IMAGES\А112Т4.jpg" />
     <Content Include="Model41.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model41.Context.cs</LastGenOutput>
@@ -188,18 +200,19 @@
       <DependentUpon>Model41.edmx</DependentUpon>
       <LastGenOutput>Model41.cs</LastGenOutput>
     </Content>
-    <Resource Include="Товар_import\B320R5.jpg" />
-    <Resource Include="Товар_import\D329H3.jpg" />
-    <Resource Include="Товар_import\D572U8.jpg" />
-    <Resource Include="Товар_import\F572H7.jpg" />
-    <Resource Include="Товар_import\F635R4.jpg" />
-    <Resource Include="Товар_import\G783F5.jpg" />
-    <Resource Include="Товар_import\H782T5.jpg" />
-    <Resource Include="Товар_import\J384T6.jpg" />
-    <Resource Include="Товар_import\А112Т4.jpg" />
+    <Resource Include="res\B320R5.jpg" />
+    <Resource Include="res\D329H3.jpg" />
+    <Resource Include="res\D572U8.jpg" />
+    <Resource Include="res\F572H7.jpg" />
+    <Resource Include="res\F635R4.jpg" />
+    <Resource Include="res\G783F5.jpg" />
+    <Resource Include="res\H782T5.jpg" />
+    <Resource Include="res\J384T6.jpg" />
+    <Resource Include="res\А112Т4.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
