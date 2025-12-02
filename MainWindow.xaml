@@ -9,7 +9,7 @@
 
     <Grid Background="#FFCC99">
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
