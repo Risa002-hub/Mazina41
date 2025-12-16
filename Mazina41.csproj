@@ -67,37 +67,44 @@
     <Compile Include="AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model41.cs">
+    <Compile Include="Mazina.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mazina.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mazina.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mazina.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mazina.edmx</DependentUpon>
     </Compile>
     <Compile Include="Order.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderProduct.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderWindow.xaml.cs">
+      <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PickUpPoint.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Compile Include="Role.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>Model41.tt</DependentUpon>
+      <DependentUpon>Mazina.tt</DependentUpon>
     </Compile>
     <Page Include="AddEditPage.xaml">
       <SubType>Designer</SubType>
@@ -122,6 +129,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProductPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,16 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager.cs" />
-    <Compile Include="Model41.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model41.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model41.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model41.edmx</DependentUpon>
-    </Compile>
     <Compile Include="ProductPage.xaml.cs">
       <DependentUpon>ProductPage.xaml</DependentUpon>
     </Compile>
@@ -159,21 +160,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model41.edmx">
+    <EntityDeploy Include="Mazina.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model41.Designer.cs</LastGenOutput>
+      <LastGenOutput>Mazina.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model41.edmx.diagram">
-      <DependentUpon>Model41.edmx</DependentUpon>
+    <None Include="App.Config" />
+    <None Include="Mazina.edmx.diagram">
+      <DependentUpon>Mazina.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="res\logo.png" />
@@ -197,16 +196,6 @@
     <Resource Include="IMAGES\H782T5.jpg" />
     <Resource Include="IMAGES\J384T6.jpg" />
     <Resource Include="IMAGES\А112Т4.jpg" />
-    <Content Include="Model41.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model41.Context.cs</LastGenOutput>
-      <DependentUpon>Model41.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model41.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model41.edmx</DependentUpon>
-      <LastGenOutput>Model41.cs</LastGenOutput>
-    </Content>
     <Resource Include="res\B320R5.jpg" />
     <Resource Include="res\D329H3.jpg" />
     <Resource Include="res\D572U8.jpg" />
@@ -220,6 +209,17 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Mazina.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mazina.edmx</DependentUpon>
+      <LastGenOutput>Mazina.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Mazina.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Mazina.edmx</DependentUpon>
+      <LastGenOutput>Mazina.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

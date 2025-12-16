@@ -18,12 +18,20 @@ namespace Mazina41
     /// <summary>
     /// Логика взаимодействия для ProductPage.xaml
     /// </summary>
+  
+
     public partial class ProductPage : Page
     {
+
+         List<OrderProduct> selectedOrderProducts = new List<OrderProduct>();
+        List<Product> selectedProducts = new List<Product>();
+         int newOrderID = 0;
+        private User currentUser;
         public ProductPage(User user)
         {
             InitializeComponent();
-            //FIOTB - ТЕКСТБОКС ДЛЯ ОТОБРАЖЕНИЯ ФИО 
+            currentUser = user;
+
             if (user == null)
             {
                 FIOTB.Text = "Гость";
@@ -35,72 +43,33 @@ namespace Mazina41
                 switch (user.UserRole)
                 {
                     case 1:
-                        // RoleTB - текстбокс для роли 
-                        RoleTB.Text = "Клиент";
-                        break;
+                        RoleTB.Text = "Клиент"; break;
                     case 2:
-                        RoleTB.Text = "Менеджер";
-                        break;
+                        RoleTB.Text = "Менджер"; break;
                     case 3:
-                        RoleTB.Text = "Администратор";
-                        break;
+                        RoleTB.Text = "Администратор"; break;
                 }
             }
-            var currentShop = Mazina41Entities.GetContext().Product.ToList();
-            ShopListView.ItemsSource = currentShop;
+            var currentProducts = Mazina41Entities.GetContext().Product.ToList();
+            ProductListView.ItemsSource = currentProducts;
+
             ComboType.SelectedIndex = 0;
-            ComboType.ItemsSource = discount_filters;
+
             UpdateService();
 
-
+            var Orders = Mazina41Entities.GetContext().Order.ToList();
+            newOrderID = Orders.Count + 1;
         }
-        List<string> discount_filters = new List<string> { "все", "0-9%", "10-14%", "15-100%" };
+
+        
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Manager.MainFrame.Navigate(new AddEditPage());
         }
 
-        private void UpdateService()
-        {
 
-            var currentShop = Mazina41Entities.GetContext().Product.ToList();
-            var raw_products_count = currentShop.Count;
-
-            if (TBoxSearch.Text.Length > 0)
-                currentShop = currentShop.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
-
-
-            if (ComboType.SelectedIndex == 1)
-            {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 9)).ToList();
-            }
-            if (ComboType.SelectedIndex == 2)
-            {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 10 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 14)).ToList();
-            }
-            if (ComboType.SelectedIndex == 3)
-            {
-                currentShop = currentShop.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 15 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
-            }
-
-            currentShop = currentShop.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
-            SearchResultTB.Text = "кол-во " + Convert.ToString(currentShop.Count) + " из " + Convert.ToString(raw_products_count);
-
-            if (RButtonDown.IsChecked.Value)
-            {
-                currentShop = currentShop.OrderByDescending(p => p.ProductCost).ToList();
-            }
-            if (RButtonUp.IsChecked.Value)
-            {
-                currentShop = currentShop.OrderBy(p => p.ProductCost).ToList();
-            }
-
-            ShopListView.ItemsSource = currentShop;
-
-        }
-
-        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void TBSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateService();
         }
@@ -118,6 +87,101 @@ namespace Mazina41
         private void RButtonUp_Checked(object sender, RoutedEventArgs e)
         {
             UpdateService();
+        }
+        private void UpdateService()
+        {
+
+            var currentProducts = Mazina41Entities.GetContext().Product.ToList();
+            var raw_products_count = currentProducts.Count;
+
+            if (TBoxSearch.Text.Length > 0)
+                currentProducts = currentProducts.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+
+            if (ComboType.SelectedIndex == 0)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) >= 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
+            }
+            if (ComboType.SelectedIndex == 1)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 0 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 9.99)).ToList();
+            }
+            if (ComboType.SelectedIndex == 2)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 9.99 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 14.99)).ToList();
+            }
+            if (ComboType.SelectedIndex == 3)
+            {
+                currentProducts = currentProducts.Where(p => (Convert.ToInt32(p.ProductDiscountAmount) > 15 && (Convert.ToInt32(p.ProductDiscountAmount)) <= 100)).ToList();
+            }
+
+            currentProducts = currentProducts.Where(p => p.ProductName.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
+            SearchTBl.Text = "кол-во " + Convert.ToString(currentProducts.Count) + " из " + Convert.ToString(raw_products_count);
+            
+            ProductListView.ItemsSource = currentProducts;
+            ProductListView.ItemsSource = currentProducts.ToList();
+
+            if (RButtonDown.IsChecked.Value)
+            {
+                ProductListView.ItemsSource = currentProducts.OrderByDescending(p => p.ProductCost).ToList();
+            }
+            if (RButtonUp.IsChecked.Value)
+            {
+                ProductListView.ItemsSource = currentProducts.OrderBy(p => p.ProductCost).ToList();
+            }
+
+
+
+        }
+
+        
+
+       
+
+     
+        private void Oreeder_Click(object sender, RoutedEventArgs e)
+        {
+            selectedProducts = selectedProducts.Distinct().ToList();
+
+            var orderProductsCopy = new List<OrderProduct>(selectedOrderProducts);
+            var productsCopy = new List<Product>(selectedProducts);
+
+            OrderWindow orderWindow = new OrderWindow(orderProductsCopy, productsCopy, FIOTB.Text, currentUser);
+            orderWindow.ShowDialog();
+            selectedProducts.Clear();
+            selectedOrderProducts.Clear();
+            ViewOrderBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (ProductListView.SelectedIndex >= 0)
+            {
+                var prod = ProductListView.SelectedItem as Product;
+                selectedProducts.Add(prod);
+
+                var newOrderProd = new OrderProduct();
+                newOrderProd.OrderID = newOrderID;
+
+                newOrderProd.ProductArticleNumber = prod.ProductArticleNumber;
+                newOrderProd.OrderProductCount = 1;
+
+                var selOP = selectedOrderProducts.Where(p => Equals(p.ProductArticleNumber, prod.ProductArticleNumber));
+                if (selOP.Count() == 0)
+                {
+                    selectedOrderProducts.Add(newOrderProd);
+                }
+                else
+                {
+                    foreach (OrderProduct p in selectedOrderProducts)
+                    {
+                        if (p.ProductArticleNumber == prod.ProductArticleNumber)
+                            p.OrderProductCount++;
+                    }
+                }
+
+                ViewOrderBtn.Visibility = Visibility.Visible;
+                ProductListView.SelectedIndex = -1;
+            }
         }
     }
 }

@@ -20,5 +20,4 @@ namespace Mazina41
         public Nullable<int> version { get; set; }
         public byte[] definition { get; set; }
     }
-
 }

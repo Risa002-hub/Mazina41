@@ -26,19 +26,19 @@
             <TextBlock Name="captchaThreeWord" FontSize="22" TextDecorations="Strikethrough"></TextBlock>
             <TextBlock Name="captchaFourWord" FontSize="22" TextDecorations="Strikethrough" Margin="0,10,0,0"></TextBlock>
         </StackPanel>
-
+        
         <TextBox 
             Grid.Row="2" Grid.Column="1"
             Text="" Name="CaptchaTB" 
             Width="200" VerticalAlignment="Center" 
-            HorizontalAlignment="left" Margin="10" Visibility="Collapsed" >
-        </TextBox>
-        
+            HorizontalAlignment="left" Margin="10" Visibility="Collapsed" />
+
         <TextBlock Text="Логин" Grid.Row="0" Grid.Column="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
         <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
         <TextBox Name="LoginTB" Grid.Row="0" Grid.Column="2" Width="250" Height="50"></TextBox>
         <TextBox Name="PassTB" Grid.Row="1" Grid.Column="2" Width="250" Height="50"></TextBox>
         <Button Content="Войти как гость" Name="GuestBtn" Click="GuestBtn_Click"  Grid.Row="2" Grid.Column="0" ></Button>
         <Button Content="Войти" Name="LoginBtn" Click="LoginBtn_Click" Grid.Row="2"  Grid.Column="2"></Button>
+        
     </Grid>
 </Page>
