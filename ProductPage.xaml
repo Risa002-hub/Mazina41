@@ -73,9 +73,7 @@
                             <Image.Source>
                                 <Binding Path="ProductPhotoPath">
                                     <Binding.TargetNullValue>
-                                        <ImageSource>
-                                            IMAGES/picture.png
-                                        </ImageSource>
+                                        <Image Source="/res/logo.png" />
                                     </Binding.TargetNullValue>
                                 </Binding>
                             </Image.Source>
