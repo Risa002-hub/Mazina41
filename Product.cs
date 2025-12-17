@@ -38,7 +38,7 @@ namespace Mazina41
             {
                 if (ProductPhoto == null)
                     return null;
-                return "Товар_import/" + ProductPhoto;
+                return "IMAGES/" + ProductPhoto; // имя папки!!!!!!!! 
             }
         }
         public string ProductStatus { get; set; }

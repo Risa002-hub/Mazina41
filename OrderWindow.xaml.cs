@@ -63,8 +63,8 @@ namespace Mazina41
             }
 
             DateTime deliveryDate = DateTime.Now.AddDays(deliveryDays);
-            DeliveryDate.Text = deliveryDate.ToString("dd.MM.yyyy");
             StartDate.Text = DateTime.Now.ToString("dd.MM.yyyy");
+            DeliveryDate.Text = deliveryDate.ToString("dd.MM.yyyy");
         }
 
         private void BtnPlus_Click(object sender, RoutedEventArgs e)
@@ -88,7 +88,7 @@ namespace Mazina41
         private void BtnMinus_Click(object sender, RoutedEventArgs e)
         {
             var product = (sender as Button).DataContext as Product;
-            if (product != null && product.ProductQuantityInStock > 1)
+            if (product != null && product.ProductQuantityInStock > 0)
             {
                 product.ProductQuantityInStock--;
 
@@ -96,8 +96,15 @@ namespace Mazina41
                 if (selectedOP != null)
                 {
                     selectedOP.OrderProductCount--;
-                }
 
+                    if (selectedOP.OrderProductCount <= 0)
+                    {
+                        selectedOrderProducts.Remove(selectedOP);
+                        selectedProducts.Remove(product);
+
+                    }
+                }
+               
                 ProductListView.Items.Refresh();
                 SetDeliveryDate();
             }
@@ -113,10 +120,10 @@ namespace Mazina41
 
             if (selectedOrderProducts == null || !selectedOrderProducts.Any())
             {
-                MessageBox.Show("Добавьте товары в заказ!");
+                MessageBox.Show("Добавьте товары в заказ! КОРЗИНА ПУСТА");
                 return;
             }
-
+            
             try
             {
 
